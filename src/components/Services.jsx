@@ -1,10 +1,23 @@
+import { useState } from "react";
 import { Home, Building, Video, Users } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-const ServiceCard = ({ icon: Icon, title, description }) => (
+const ServiceCard = ({
+  icon: Icon,
+  title,
+  description,
+  isHovered,
+  onHoverStart,
+  onHoverEnd,
+}) => (
   <motion.div
-    className="bg-deepPurple-darkest p-6 rounded-lg shadow-md border-4 border-transparent cursor-pointer transition-all hover:border-deepPurple-accent hover:scale-105"
+    className={`bg-deepPurple-darkest p-6 rounded-lg shadow-md border-4 border-transparent cursor-pointer transition-all hover:border-deepPurple-accent hover:scale-105 ${
+      isHovered === false ? "opacity-50 blur-sm" : ""
+    }`}
+    onMouseEnter={onHoverStart}
+    onMouseLeave={onHoverEnd}
     whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.95 }}
   >
@@ -14,7 +27,18 @@ const ServiceCard = ({ icon: Icon, title, description }) => (
   </motion.div>
 );
 
+ServiceCard.propTypes = {
+  icon: PropTypes.elementType.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  isHovered: PropTypes.bool.isRequired,
+  onHoverStart: PropTypes.func.isRequired,
+  onHoverEnd: PropTypes.func.isRequired,
+};
+
 const Services = () => {
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+
   const services = [
     {
       icon: Home,
@@ -56,13 +80,19 @@ const Services = () => {
         {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => (
-            <ServiceCard key={index} {...service} />
+            <ServiceCard
+              key={index}
+              {...service}
+              isHovered={hoveredIndex === null || hoveredIndex === index}
+              onHoverStart={() => setHoveredIndex(index)}
+              onHoverEnd={() => setHoveredIndex(null)}
+            />
           ))}
         </div>
-        <div className="flex justify-center mt-10 ">
+        <div className="flex justify-center mt-10">
           <Link to="/services">
             <motion.button
-              className="bg-deepPurple-lightest w-52   text-white font-bold py-4 px-8 rounded-full hover:bg-deepPurple-lighter transition-colors"
+              className="bg-deepPurple-lightest w-52 text-white font-bold py-4 px-8 rounded-full hover:bg-deepPurple-lighter transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

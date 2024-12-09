@@ -1,125 +1,154 @@
-import { motion } from "framer-motion";
-import { LiaAngleDoubleUpSolid } from "react-icons/lia";
+const plans = [
+  {
+    name: "Basic Platform",
+    price: "$229/yr",
+    description:
+      "Perfect for bloggers and small site owners requiring occasional cleanups with ongoing security scans.",
+    features: [
+      true,
+      true,
+      "30 hrs",
+      true,
+      "Every 12 hrs",
+      true,
+      true,
+      false,
+      false,
+    ],
+    buttonText: "Buy Now",
+  },
+  {
+    name: "Pro Platform",
+    price: "$339/yr",
+    description:
+      "Ideal for SMBs who want to minimize disruptions with advanced support for quick SSL certificate transfers.",
+    features: [
+      true,
+      true,
+      "12 hrs",
+      true,
+      "Every 6 hrs",
+      true,
+      true,
+      true,
+      false,
+    ],
+    buttonText: "Buy Now",
+  },
+  {
+    name: "Business Platform",
+    price: "$549/yr",
+    description:
+      "Fastest response time for malware cleanups with frequent scans to help detect and protect against vulnerabilities.",
+    features: [
+      true,
+      true,
+      "6 hrs",
+      true,
+      "Every 30 mins",
+      true,
+      true,
+      true,
+      true,
+    ],
+    buttonText: "Buy Now",
+  },
+  {
+    name: "Junior Dev",
+    price: "$999.98/yr",
+    description:
+      "Ideal for freelancers, web pros, and agencies with 5+ sites requiring quick SLAs, access to trained reps, and comprehensive malware protection.",
+    features: [5, true, "12 hrs", true, "Every 6 hrs", true, true, true, true],
+    buttonText: "Chat Now",
+  },
+];
 
-const PricingSection = () => {
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0 },
-  };
+const featureList = [
+  "Sites Covered",
+  "Malware & Hack Removals",
+  "SLA to Remove Malware",
+  "Website Application Firewall (WAF)",
+  "Security Scan Frequency",
+  "Post-cleanup Basic Report",
+  "Blacklist Monitoring & Removal",
+  "SSL Support & Monitoring",
+  "CDN Speed Enhancement",
+];
 
-  const pricingPlans = [
-    {
-      name: "Free",
-      price: "$0.00",
-      description:
-        "Ideal for individuals looking to enhance their online security",
-      features: [
-        "Basic Threat Detection",
-        "Password Manager",
-        "Two-Factor Authentication",
-        "Security Alerts",
-        "Basic Privacy Protection",
-      ],
-      buttonText: "Start for Free",
-      buttonClass: "bg-deepPurple-light hover:bg-deepPurple-lighter",
-    },
-    {
-      name: "Professional",
-      price: "$98.00",
-      description:
-        "Best for small businesses needing comprehensive security solutions",
-      features: [
-        "Everything in Free",
-        "Advanced Threat Detection",
-        "Custom Security Policies",
-        "Data Encryption",
-        "Enhanced Privacy Controls",
-      ],
-      buttonText: "Sign Up with Professional",
-      buttonClass: "bg-deepPurple-lightest hover:bg-deepPurple-accent",
-      isPopular: true,
-    },
-    {
-      name: "Enterprise",
-      price: "$160.00",
-      description:
-        "Tailored for large organizations requiring top-tier security measures",
-      features: [
-        "Security Audits",
-        "24/7 Monitoring",
-        "Incident Response",
-        "Data Protection",
-        "Security Tool Integration",
-      ],
-      buttonText: "Sign Up with Enterprise",
-      buttonClass: "bg-deepPurple-light hover:bg-deepPurple-lighter",
-    },
-  ];
-
+const PricingTable = () => {
   return (
-    <div
-      className="min-h-screen bg-deepPurple-dark text-neutral-light py-16 flex items-center justify-center flex-col font-JetBrains"
-      style={{
-        backgroundImage:
-          "radial-gradient(#7a4d9c 2.5px, transparent 2.5px), radial-gradient(#7a4d9c 2.5px, transparent 2.5px)",
-        backgroundSize: "45px 45px",
-        backgroundPosition: "0 0, 22.5px 22.5px",
-        backgroundColor: "#25003b",
-      }}
-    >
-      <h1 className="mb-10 text-5xl text-deepPurple-lightest font-bold">
-        Pricing
-      </h1>
-      <div className="grid md:grid-cols-3 gap-8 px-4 max-w-6xl">
-        {pricingPlans.map((plan, index) => (
-          <motion.div
-            key={plan.name}
-            variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{
-              duration: 0.8,
-              ease: "easeInOut",
-              delay: index * 0.2,
-            }}
-            className={`bg-deepPurple-darkest rounded-lg p-6 shadow-lg border-4 border-transparent cursor-pointer backdrop-blur-md transition-colors ${
-              plan.isPopular
-                ? "transition-colors border-deepPurple-lightest"
-                : " transition-colors hover:border-deepPurple-lighter"
-            } hover:scale-105 transition-transform relative`}
-          >
-            {plan.isPopular && (
-              <span className="absolute top-2 right-2 bg-deepPurple-accent text-white text-xs px-3 py-1 rounded-full">
-                Most Popular
-              </span>
-            )}
-            <h3 className="text-2xl font-semibold text-deepPurple-lightest">
-              {plan.name}
-            </h3>
-            <p className="text-4xl font-bold my-4 ">
-              {plan.price}
-              <span className="text-lg text-neutral-dark">/month</span>
-            </p>
-            <p className="text-neutral-medium">{plan.description}</p>
-            <button
-              className={`w-full text-white py-2 rounded mt-6 transition-colors duration-300 ${plan.buttonClass}`}
-            >
-              {plan.buttonText}
-            </button>
-            <ul className="mt-6 space-y-2 text-slate-400">
-              {plan.features.map((feature, featureIndex) => (
-                <li key={featureIndex} className="flex items-center">
-                  <LiaAngleDoubleUpSolid className="mr-2 text-white" />
-                  {feature}
-                </li>
+    <section className="bg-gray-100 py-16">
+      <div className="container mx-auto px-4">
+        <h2 className="text-4xl font-bold text-center mb-10">
+          Our Pricing Plans
+        </h2>
+        <div className="overflow-x-auto">
+          <table className="table-auto w-full border-collapse border border-gray-200">
+            {/* Table Head */}
+            <thead>
+              <tr className="bg-gray-200">
+                <th className="p-4 text-left text-sm font-semibold text-gray-600"></th>
+                {plans.map((plan, index) => (
+                  <th
+                    key={index}
+                    className={`p-4 text-center text-lg font-semibold ${
+                      index === 3
+                        ? "bg-deepPurple-dark text-white"
+                        : "text-gray-800"
+                    }`}
+                  >
+                    {plan.name}
+                    <p className="text-base font-normal mt-1">{plan.price}</p>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+
+            {/* Table Body */}
+            <tbody>
+              {featureList.map((feature, rowIndex) => (
+                <tr
+                  key={rowIndex}
+                  className={rowIndex % 2 === 0 ? "bg-gray-100" : "bg-white"}
+                >
+                  <td className="p-4 text-left text-gray-700">{feature}</td>
+                  {plans.map((plan, colIndex) => (
+                    <td
+                      key={colIndex}
+                      className="p-4 text-center text-gray-800"
+                    >
+                      {plan.features[rowIndex] === true
+                        ? "✔️"
+                        : plan.features[rowIndex] === false
+                        ? "❌"
+                        : plan.features[rowIndex]}
+                    </td>
+                  ))}
+                </tr>
               ))}
-            </ul>
-          </motion.div>
-        ))}
+              {/* Call-to-action Row */}
+              <tr>
+                <td className="p-4"></td>
+                {plans.map((plan, index) => (
+                  <td key={index} className="p-4 text-center">
+                    <button
+                      className={`py-2 px-4 rounded font-bold ${
+                        index === 3
+                          ? "bg-green-600 text-white hover:bg-green-500"
+                          : "bg-deepPurple-accent text-white hover:bg-deepPurple-lighter"
+                      }`}
+                    >
+                      {plan.buttonText}
+                    </button>
+                  </td>
+                ))}
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
-export default PricingSection;
+export default PricingTable;

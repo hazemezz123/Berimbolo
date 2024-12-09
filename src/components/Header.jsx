@@ -46,7 +46,7 @@ const Header = () => {
             </div>
           </NavLink>
           <NavLink to="/Pricing">
-            <div className="flex justify-center item-center">
+            <div className="flex justify-center items-center">
               <MdOutlineAttachMoney className="mr-2" />
               <span>Pricing</span>
             </div>
